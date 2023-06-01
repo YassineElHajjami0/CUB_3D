@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 13:47:07 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/06/01 15:09:24 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/06/01 15:24:49 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,45 +53,46 @@ void	player_rotation_and_facing(t_all *all, int *step,
 	else
 		all->player->facing_up = -1;
 	if ((all->player->rotation_angle >= 1.5 * M_PI
-		&& all->player->rotation_angle <= 2 * M_PI)
+			&& all->player->rotation_angle <= 2 * M_PI)
 		|| (all->player->rotation_angle >= 0
-		&& all->player->rotation_angle <= 0.5 * M_PI))
+			&& all->player->rotation_angle <= 0.5 * M_PI))
 		all->player->facing_right = 1;
 	else
 		all->player->facing_right = -1;
-	all->player->rotation_angle += all->player->turn_direction * all->player->rotation_speed;
+	all->player->rotation_angle += all->player->turn_direction * \
+		all->player->rotation_speed;
 	*step = all->player->walk_direction * all->player->move_speed;
-	new_coordination->x = all->player->coor.x + cos(all->player->rotation_angle) * (*step);
-	new_coordination->y = all->player->coor.y + sin(all->player->rotation_angle) * (*step);
+	new_coordination->x = all->player->coor.x + \
+		cos(all->player->rotation_angle) * (*step);
+	new_coordination->y = all->player->coor.y + \
+		sin(all->player->rotation_angle) * (*step);
 }
 
-void update_coordination(t_all *all)
+void	update_coordination(t_all *all)
 {
-	int step;
-	t_point new_coordination;
-	int line;
-	int column;
-	
+	int		step;
+	t_point	new_coordination;
+	int		line;
+	int		column;
+
 	player_rotation_and_facing(all, &step, &new_coordination);
 	line = (int)(new_coordination.y / 64);
 	column = (int)(new_coordination.x / 64);
 	if (line >= all->number_lines || column >= (int)ft_strlen(all->map[line]))
-		return;
+		return ;
 	if (hitted_with_wall(new_coordination.x, new_coordination.y - 5, all))
-		return;
+		return ;
 	if (hitted_with_wall(new_coordination.x + 5, new_coordination.y, all))
-		return;
+		return ;
 	if (hitted_with_wall(new_coordination.x, new_coordination.y + 5, all))
-		return;
+		return ;
 	if (hitted_with_wall(new_coordination.x - 5, new_coordination.y, all))
-		return;
+		return ;
 	all->player->coor.x = new_coordination.x;
 	all->player->coor.y = new_coordination.y;
 }
 
-
-
-double get_distance(t_point a, t_point b)
+double	get_distance(t_point a, t_point b)
 {
 	if (b.x == -1 || b.y == -1)
 		return (INT_MAX);

@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 13:30:13 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/06/01 13:32:18 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/06/01 15:25:28 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 t_point get_vertical_touch(t_all *all, int i)
 {
     t_point first;
-    double x_step;
-    double y_step;
-    double p;
+    double  x_step;
+    double  y_step;
+    double  p;
 
     first.x = floor(all->player->coor.x / 64) * 64;
     if (all->rays[i].facing_right)
         first.x += 64;
-    first.y = tan(all->rays[i].rayAngle) * (first.x - all->player->coor.x) + all->player->coor.y;
+    first.y = tan(all->rays[i].ray_angle) * (first.x - all->player->coor.x) + all->player->coor.y;
     x_step = 64;
     if (all->rays[i].facing_left)
         x_step *= -1;
-    y_step = tan(all->rays[i].rayAngle) * 64;
+    y_step = tan(all->rays[i].ray_angle) * 64;
     if (all->rays[i].facing_up && y_step > 0)
         y_step *= -1;
     if (all->rays[i].facing_down && y_step < 0)
@@ -59,9 +59,9 @@ t_point get_horizontal_touch(t_all *all, int i)
     first.y = floor(all->player->coor.y / 64) * 64;
     if (all->rays[i].facing_down)
         first.y += 64;
-    first.x = (first.y - all->player->coor.y) / tan(all->rays[i].rayAngle) + all->player->coor.x; /// here
+    first.x = (first.y - all->player->coor.y) / tan(all->rays[i].ray_angle) + all->player->coor.x; /// here
     y_step = 64;
-    x_step = 64 / tan(all->rays[i].rayAngle);
+    x_step = 64 / tan(all->rays[i].ray_angle);
     // printf("first y = %f\n, first x = %f\n, y_step = %f\n, x_step = %f\n", first.y, first.x, y_step, x_step);
     // exit(1);
     if (all->rays[i].facing_up)
@@ -123,11 +123,11 @@ void set_ray_facing_direction(t_ray *ray)
     ray->facing_down = 0;
     ray->facing_left = 0;
     ray->facing_right = 0;
-    if (ray->rayAngle >= M_PI && ray->rayAngle <= 2 * M_PI)
+    if (ray->ray_angle >= M_PI && ray->ray_angle <= 2 * M_PI)
         ray->facing_up = 1;
     else
         ray->facing_down = 1;
-    if ((ray->rayAngle >= 1.5 * M_PI && ray->rayAngle <= 2 * M_PI) || (ray->rayAngle >= 0 && ray->rayAngle <= 0.5 * M_PI))
+    if ((ray->ray_angle >= 1.5 * M_PI && ray->ray_angle <= 2 * M_PI) || (ray->ray_angle >= 0 && ray->ray_angle <= 0.5 * M_PI))
         ray->facing_right = 1;
     else
         ray->facing_left = 1;
@@ -146,7 +146,7 @@ void set_rays(t_all *all)
     i = -1;
     while (++i < NUMBER_RAYS)
     {
-        all->rays[i].rayAngle = angle;
+        all->rays[i].ray_angle = angle;
         set_ray_facing_direction(all->rays + i);
         set_ray(all, i);
         angle += (FOV / NUMBER_RAYS);
