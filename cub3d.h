@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 12:37:35 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/06/01 11:12:41 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/06/01 13:59:22 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 #define WINDOW_WIDTH 1980
 #define WINDOW_HEIGHT 1024
 #define SCALE 0.5
-#define THICK 7
+#define THICK 1
 #define NUMBER_RAYS WINDOW_WIDTH / THICK
 #define TILE_SIZE 64
 #define A 0
@@ -105,8 +105,6 @@ typedef struct s_all
     unsigned int *east_array;
 } t_all;
 
-
-
 typedef struct   s_info
 {
     char    *north;
@@ -127,5 +125,13 @@ void    write_error(int n);
 void    parsing(int ac, char **av, t_all *all);
 void    draw_mini_map(t_all *all);
 void	my_mlx_pixel_put(t_all *all, int x, int y, int color);
+void init_all(t_all *all);
+void init_player(t_all *all);
+void set_ray(t_all *all, int i);
+void set_ray_facing_direction(t_ray *ray);
+void set_rays(t_all *all);
+bool hitted_with_wall(double x, double y, t_all *all);
+double get_distance(t_point a, t_point b);
+void update_coordination(t_all *all);
 
 #endif

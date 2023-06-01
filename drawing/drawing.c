@@ -90,6 +90,7 @@ void    draw_mini_map(t_all *all)
 		i++;
 	}
     draw_player(all);
-	draw_line(all, all->player->coor.x, all->player->coor.y, all->rays[0].coor.x, all->rays[0].coor.y);
-
+	int z = -1;
+	while (++z < NUMBER_RAYS)
+		draw_line(all, all->player->coor.x, all->player->coor.y, all->rays[z].coor.x, all->rays[z].coor.y);
 }

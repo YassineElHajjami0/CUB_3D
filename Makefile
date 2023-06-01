@@ -1,6 +1,6 @@
 NAME = cub3d
 # -Wall -Wextra -Werror
-CFLAGS =  -g -lmlx -framework OpenGL -framework AppKit -g -fsanitize=address
+CFLAGS =  -g -lmlx -framework OpenGL -framework AppKit -g
 CC = cc
 
 SRC = cub3d.c \
@@ -8,7 +8,10 @@ SRC = cub3d.c \
 	parsing/paarsing.c \
 	get_next_line/get_next_line.c \
 	get_next_line/get_next_line_utils.c \
-	drawing/drawing.c
+	drawing/drawing.c \
+	ray_casting.c \
+	calculations_fns.c \
+	init/init.c
 
 all : $(NAME)
 
