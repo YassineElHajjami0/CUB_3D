@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 12:37:35 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/06/01 15:25:12 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/06/04 11:51:35 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define WINDOW_HEIGHT 1024
 # define SCALE 0.5
 # define THICK 1
-# define NUMBER_RAYS WINDOW_WIDTH / THICK
+# define NUMBER_RAYS (WINDOW_WIDTH / THICK)
 # define TILE_SIZE 64
 # define A 0
 # define S 1
@@ -80,6 +80,8 @@ typedef struct s_ray
 	int		facing_left;
 	int		facing_right;
 	t_point	coor;
+	double	column_height;
+	
 }	t_ray;
 
 typedef struct s_all
@@ -105,7 +107,7 @@ typedef struct s_all
 	unsigned int	*east_array;
 }	t_all;
 
-typedef struct	s_info
+typedef struct	 s_info
 {
 	char	*north;
 	char	*west;
