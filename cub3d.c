@@ -41,12 +41,24 @@ int	ft_exit(void)
 	exit(0);
 }
 
+// p.y = 0;
+//     if (ray.hitvertical)
+// 		p.x = fmod(ray.coor.y, TILE_SIZE);
+// 	else 
+// 		p.x = fmod(ray.coor.x, TILE_SIZE);
+
+//         for (i = y; i < y + height; i++)
+//         {
+//                     p.y = ((double)(i - y) / height) * TEXT_WIDTH;
+//                             my_mlx_pixel_put(all, x, i, all->west_array[((int)p.x + (TEXT_WIDTH * (int)p.y))]);
+
 void	draw_column(t_all *all, int column, double start, double end)
 {
 	double	offset;
 	double	step;
 	int		i;
 	int		j;
+	int		index;
 
 	if (all->rays[column].hitvertical)
 		offset = fmod(all->rays[column].coor.y , 64);
