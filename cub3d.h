@@ -91,6 +91,8 @@ typedef struct s_all
 	int				number_lines;
 	int				i;
 	int				j;
+	int				k;
+	int				z;
 	t_data			data;
 	t_data			north;
 	t_data			south;

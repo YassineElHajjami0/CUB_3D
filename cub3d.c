@@ -43,17 +43,38 @@ int	ft_exit(void)
 
 void	draw_column(t_all *all, int column, double start, double end)
 {
-	while (start < end)
+	double	offset;
+	double	step;
+	int		i;
+	int		j;
+
+	if (all->rays[column].hitvertical)
+		offset = fmod(all->rays[column].coor.y , 64);
+	else
+		offset = fmod(all->rays[column].coor.x , 64);
+	
+	step = all->rays[column].column_height / 64;
+	i = 0;
+	while (i < 64)
 	{
-		my_mlx_pixel_put(all, column, start, 0x808080);
-		start++;
+		j = 0;
+		while (j < step)
+		{
+			my_mlx_pixel_put(all, column, start, all->north_array[(int)offset]);
+			start++;
+			j++;
+		}
+		offset += 64;
+		if (offset >= 64 * 64)
+			break ;
+		i++;
 	}
 }
 
 void	rendering_walls(t_all *all)
 {
 	double half_screen = WINDOW_HEIGHT / 2;
-	// all->i = -1;
+
 	all->i = -1;
 	while (++all->i < NUMBER_RAYS)
 		draw_column(all, all->i, half_screen - all->rays[all->i].column_height / 2, half_screen + all->rays[all->i].column_height / 2);

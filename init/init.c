@@ -26,6 +26,10 @@ void init_all(t_all *all)
     all->data.img = mlx_new_image(all->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
     all->data.addr = mlx_get_data_addr(all->data.img, &all->data.bits_per_pixel,
         &all->data.line_length, &all->data.endian);
+
+    all->north.img = mlx_xpm_file_to_image(all->mlx, "./textures/north.xpm", &(all->z), &(all->k));
+    all->north.addr = mlx_get_data_addr(all->north.img, &all->north.bits_per_pixel, &all->north.line_length,&all->north.endian);
+    all->north_array = (unsigned int *)all->north.addr;
 }
 
 void    init_player_facing_direction(t_all *all)
