@@ -116,7 +116,7 @@ void set_ray(t_all *all, int i)
         all->rays[i].distance = dist_hor;
     }
     all->rays[i].distance = cos((FOV / 2) - (FOV / NUMBER_RAYS) * i) * all->rays[i].distance;
-    all->rays[i].column_height = 40000 / all->rays[i].distance;
+    all->rays[i].column_height = 100000 / all->rays[i].distance;
 }
 
 void set_ray_facing_direction(t_ray *ray)

@@ -1,6 +1,6 @@
 NAME = cub3d
 # -Wall -Wextra -Werror
-CFLAGS =  -g -lmlx -framework OpenGL -framework AppKit -g
+CFLAGS =  -g -lmlx -framework OpenGL -framework AppKit
 CC = cc
 
 SRC = cub3d.c \

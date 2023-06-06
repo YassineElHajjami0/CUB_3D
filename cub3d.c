@@ -41,55 +41,36 @@ int	ft_exit(void)
 	exit(0);
 }
 
-// p.y = 0;
-//     if (ray.hitvertical)
-// 		p.x = fmod(ray.coor.y, TILE_SIZE);
-// 	else 
-// 		p.x = fmod(ray.coor.x, TILE_SIZE);
-
-//         for (i = y; i < y + height; i++)
-//         {
-//                     p.y = ((double)(i - y) / height) * TEXT_WIDTH;
-//                             my_mlx_pixel_put(all, x, i, all->west_array[((int)p.x + (TEXT_WIDTH * (int)p.y))]);
-
-void	draw_column(t_all *all, int column, double start, double end)
+void	draw_column(t_all *all, int column, int start, int end)
 {
 	double	offset;
-	double	step;
 	int		i;
-	int		j;
-	int		index;
+	double	line;
 
 	if (all->rays[column].hitvertical)
 		offset = fmod(all->rays[column].coor.y , 64);
 	else
 		offset = fmod(all->rays[column].coor.x , 64);
-	
-	step = all->rays[column].column_height / 64;
-	i = 0;
-	while (i < 64)
-	{
-		j = 0;
-		while (j < step)
-		{
-			my_mlx_pixel_put(all, column, start, all->north_array[(int)offset]);
-			start++;
-			j++;
-		}
-		offset += 64;
-		if (offset >= 64 * 64)
-			break ;
+
+	i = start;
+	while (i < end)
+	{	
+		line = (i - start) * 64 / all->rays[column].column_height;
+		my_mlx_pixel_put(all, column,i, all->north_array[(int)offset + (64 * (int)line)]);
 		i++;
 	}
 }
 
+
 void	rendering_walls(t_all *all)
 {
-	double half_screen = WINDOW_HEIGHT / 2;
+	int half_screen = WINDOW_HEIGHT / 2;
 
 	all->i = -1;
 	while (++all->i < NUMBER_RAYS)
+	{
 		draw_column(all, all->i, half_screen - all->rays[all->i].column_height / 2, half_screen + all->rays[all->i].column_height / 2);
+	}
 }
 
 void	draw_floor(t_all *all)
@@ -130,7 +111,7 @@ int	loop(t_all *all)
 	// clear_image(all);
 	update_coordination(all);
 	set_rays(all);
-	draw_ceil(all);     
+	draw_ceil(all);   
 	rendering_walls(all);
 	draw_floor(all);
 	draw_mini_map(all);
