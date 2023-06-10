@@ -71,7 +71,7 @@ void    draw_mini_map(t_all *all)
 {
     int i = 0;
     int j = 0;
-    static int flag = 1;
+    // static int flag = 1;
     while (i < 7)
 	{
 		j = 0;

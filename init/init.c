@@ -64,7 +64,7 @@ void init_player(t_all *all)
             {
                 all->player->coor.x = j * 64;
                 all->player->coor.y = i * 64;
-                all->player->rotation_angle = 0 * M_PI;
+                all->player->rotation_angle = M_PI / 2;
                 flag = 1;
                 break ;
             }

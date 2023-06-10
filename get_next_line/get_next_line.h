@@ -21,14 +21,15 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include "../cub3d.h"
 
 char	*ft_strjoin(char *sta, char *buff);
 char	*get_next_line(int fd);
 char	*putinsta(int fd, char *sta);
-char	*ft_strchr(char *sta, int c);
-size_t	ft_strlen(char *s);
+// char	*ft_strchr(char *sta, int c);
+// size_t	ft_strlen(char *s);
 char	*putleftinsta(char *sta);
 char	*putins(char *sta);
-char	*ft_strdup(const char *s1);
+// char	*ft_strdup(const char *s1);
 
 #endif

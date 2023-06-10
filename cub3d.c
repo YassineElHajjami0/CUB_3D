@@ -118,9 +118,38 @@ int	loop(t_all *all)
 	return (0);
 }
 
+t_info	*get_info()
+{
+	t_info *info = malloc(sizeof(t_info));
+	if (!info)
+		exit(1);
+	info->ceil[0] = -1;
+	info->ceil[1] = -1;
+	info->ceil[2] = -1;
+	info->floor[0] = -1;
+	info->floor[1] = -1;
+	info->floor[2] = -1;
+	info->north = NULL;
+	info->south = NULL;
+	info->east = NULL;
+	info->west = NULL;
+	return (info);
+}
+
 int	main(int ac, char **av)
 {
+	if (ac != 2)
+		return (1);
 	t_all	*all;
+	t_info *info;
+	int		fd;
+
+	info = get_info();
+	fd = open(av[1], O_RDONLY);
+	//parsing
+	printf("%d", parse_option(fd, info));
+	exit(1);
+	//launching the game 
 
 	all = malloc(sizeof(t_all));
 	init_all(all);

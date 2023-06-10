@@ -68,20 +68,20 @@ char	*putleftinsta(char *sta)
 	return (s);
 }
 
-char	*ft_strdup(const char *s1)
-{
-	int		i;
-	char	*p;
+// char	*ft_strdup(const char *s1)
+// {
+// 	int		i;
+// 	char	*p;
 
-	i = 0;
-	while (s1[i])
-		i++;
-	p = (char *)malloc(sizeof(char) * i + 1);
-	if (!p)
-		write_error(2);
-	i = -1;
-	while (s1[++i])
-		p[i] = s1[i];
-	p[i] = '\0';
-	return (p);
-}
+// 	i = 0;
+// 	while (s1[i])
+// 		i++;
+// 	p = (char *)malloc(sizeof(char) * i + 1);
+// 	if (!p)
+// 		write_error(2);
+// 	i = -1;
+// 	while (s1[++i])
+// 		p[i] = s1[i];
+// 	p[i] = '\0';
+// 	return (p);
+// }

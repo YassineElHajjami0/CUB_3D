@@ -1,11 +1,13 @@
 NAME = cub3d
 # -Wall -Wextra -Werror
-CFLAGS =  -g -lmlx -framework OpenGL -framework AppKit
+CFLAGS =  -lmlx -framework OpenGL -framework AppKit -g
 CC = cc
 
 SRC = cub3d.c \
+	libft.c \
 	libft/split.c \
-	parsing/paarsing.c \
+	parsing/parsing.c \
+	parsing/parse_options.c \
 	get_next_line/get_next_line.c \
 	get_next_line/get_next_line_utils.c \
 	drawing/drawing.c \

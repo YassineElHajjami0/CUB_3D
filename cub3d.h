@@ -115,11 +115,12 @@ typedef struct	 s_info
 	char	*west;
 	char	*east;
 	char	*south;
-	char	*ceil;
-	char	*floor;
+	int		ceil[3];
+	int		floor[3];
 	int		map_start_at_line;
 	int		width;
 	int		height;
+	//where the player look at;
 }	t_info;
 
 char	**ft_split(char const *s, char c);
@@ -137,4 +138,24 @@ bool	hitted_with_wall(double x, double y, t_all *all);
 double	get_distance(t_point a, t_point b);
 void	update_coordination(t_all *all);
 
+
+//parsing 
+int		is_white_space(char c);
+bool	invalid_line(char *line);
+int		valide_option(char *str);
+bool	files_exist(t_info *info);
+bool	init_info(t_info *info, int type, char *line);
+bool	parse_option(int fd, t_info *info);
+
+
+//libft 
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+char	*ft_strtrim(char const *s1, char const *set);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+int		ft_isdigit(int c);
+int    ft_atoi(const char *str);
+char	*ft_strdup(const char *s1);
+char	*ft_strchr(const char *str, int c);
+size_t	ft_strlen(const char *s);
+char	*ft_strdup(const char *s1);
 #endif

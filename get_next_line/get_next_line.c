@@ -81,32 +81,32 @@ char	*putinsta(int fd, char *sta)
 	return (sta);
 }
 
-size_t	ft_strlen(char *s)
-{
-	size_t	i;
+// size_t	ft_strlen(char *s)
+// {
+// 	size_t	i;
 
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
+// 	i = 0;
+// 	if (!s)
+// 		return (0);
+// 	while (s[i] != '\0')
+// 		i++;
+// 	return (i);
+// }
 
-char	*ft_strchr(char *sta, int c)
-{
-	int	i;
+// char	*ft_strchr(char *sta, int c)
+// {
+// 	int	i;
 
-	i = 0;
-	if (!sta)
-		return (0);
-	if (c == '\0')
-		return ((char *)&sta[ft_strlen(sta)]);
-	while (sta[i] != '\0')
-	{
-		if (sta[i] == (char)c)
-			return ((char *)&sta[i]);
-		i++;
-	}
-	return (0);
-}
+// 	i = 0;
+// 	if (!sta)
+// 		return (0);
+// 	if (c == '\0')
+// 		return ((char *)&sta[ft_strlen(sta)]);
+// 	while (sta[i] != '\0')
+// 	{
+// 		if (sta[i] == (char)c)
+// 			return ((char *)&sta[i]);
+// 		i++;
+// 	}
+// 	return (0);
+// }
