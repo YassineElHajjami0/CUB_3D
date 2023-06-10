@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   paarsing.c                                         :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 15:11:37 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/05/31 16:02:17 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/06/10 15:56:51 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,55 +71,69 @@ void tba3_map(t_all *all)
     }
 }
 
-void check_element(char **map, int i, int j)
+int valid_character(char** map, int i , int j)
 {
-    if (map[i][j + 1] == '\0' || (map[i][j + 1] != '0' && map[i][j + 1] != '1' && map[i][j + 1] != 'N' && map[i][j + 1] != 'S' && map[i][j + 1] != 'E' && map[i][j + 1] != 'W'))
-        write_error(2);
-    else if (j - 1 < 0 || (map[i][j - 1] != '0' && map[i][j - 1] != '1' && map[i][j - 1] != 'N' && map[i][j - 1] != 'S' && map[i][j - 1] != 'E' && map[i][j - 1] != 'W'))
-        write_error(2);
-    else if (!map[i + 1] || (map[i + 1][j] != '0' && map[i + 1][j] != '1' && map[i + 1][j] != 'N' && map[i + 1][j] != 'S' && map[i + 1][j] != 'E' && map[i + 1][j] != 'W'))
-        write_error(2);
-    else if (i - 1 < 0 || (map[i - 1][j] != '0' && map[i - 1][j] != '1' && map[i - 1][j] != 'N' && map[i - 1][j] != 'S' && map[i - 1][j] != 'E' && map[i - 1][j] != 'W'))
-        write_error(2);
-}
+    char c = map[i][j];
+    int top = i - 1;
+    int down = i + 1;
+    int right = j + 1;
+    int left = j - 1;
+    char    c2;
 
-void is_sourounded_with_walls(t_all *all)
-{
-    all->i = 0;
-    all->j = 0;
-
-    while (all->map[all->i])
+    if (c == '0' || c == 'N' || c == 'S' || c == 'W' || c == 'E')
     {
-        all->j = 0;
-        while (all->map[all->i][all->j])
-        {
-            if (all->map[all->i][all->j] != '1' && all->map[all->i][all->j] != '0' && all->map[all->i][all->j] != ' ' && all->map[all->i][all->j] != 'N' && all->map[all->i][all->j] != 'S' && all->map[all->i][all->j] != 'E' && all->map[all->i][all->j] != 'W')
-                write_error(2);
-            if (all->map[all->i][all->j] == '0')
-                check_element(all->map, all->i, all->j);
-            if (all->map[all->i][all->j] == 'S')
-                check_element(all->map, all->i, all->j);
-            if (all->map[all->i][all->j] == 'W')
-                check_element(all->map, all->i, all->j);
-            if (all->map[all->i][all->j] == 'E')
-                check_element(all->map, all->i, all->j);
-            if (all->map[all->i][all->j] == 'N')
-                check_element(all->map, all->i, all->j);
-
-            all->j++;
-        }
-        all->i++;
+        c2 = map[top][j];
+        if (c2 != '1' && c2 != '0' && c2 != 'N' && c2 != 'S' && c2 != 'W' &&  c2 != 'E')
+            return (0);
+        c2 = map[down][j];
+        if (c2 != '1' && c2 != '0' && c2 != 'N' && c2 != 'S' && c2 != 'W' &&  c2 != 'E')
+            return (0);
+        if (right == ft_strlen(map[i]) || left == -1)
+            return (0);
+        c2 = map[i][right];
+        if (c2 != '1' && c2 != '0' && c2 != 'N' && c2 != 'S' && c2 != 'W' &&  c2 != 'E')
+            return (0);
+        c2 = map[i][left];
+        if (c2 != '1' && c2 != '0' && c2 != 'N' && c2 != 'S' && c2 != 'W' &&  c2 != 'E')
+            return (0);
     }
+    return (1);
 }
+
+
 
 void analyse_map(t_all *all)
 {
-    is_sourounded_with_walls(all);
+    int i;
+    int j;
+
+    i = 0;
+    printf("all->numberLines = %d\n", all->number_lines);
+    while (all->map[i])
+    {
+        j = 0;
+        while (all->map[i][j])
+        {
+            // if ((i == 0 && (all->map[i][j] != '1' && !is_white_space(all->map[i][j])))
+            //     || (i == (all->number_lines - 1) && (all->map[i][j] != '1' && !is_white_space(all->map[i][j]))))
+            //     write_error(2);
+            if ((i == 0 || i == all->number_lines - 1))
+            {
+                if (!is_white_space(all->map[i][j]) && all->map[i][j] != '1')
+                    write_error(2);
+            }
+            else if (!valid_character(all->map, i , j))
+                write_error(2);
+            // if (!start_end_with_one(all->map))
+            //     write_error(2);
+            j++;
+        }
+        i++;
+    }
 }
 
-void 
 // parsing(int ac, char **av, t_all *all)
-parsing(int fd, t_all *all)
+void    parsing(int fd, t_all *all)
 {
     int i;
 
@@ -136,6 +150,7 @@ parsing(int fd, t_all *all)
     all->map = get_linee(fd);
     while (all->map[all->number_lines])
         all->number_lines++;
-    // analyse_map(all);
-    // tba3_map(all);
+    analyse_map(all);
+    tba3_map(all);
+    exit(1);
 }
