@@ -21,6 +21,7 @@
 # include <fcntl.h>
 # include <mlx.h>
 # include <math.h>
+# include "./get_next_line/get_next_line.h"
 # define WINDOW_WIDTH 1980
 # define WINDOW_HEIGHT 1024
 # define SCALE 0.5
@@ -126,7 +127,8 @@ typedef struct	 s_info
 char	**ft_split(char const *s, char c);
 char	*get_next_line(int fd);
 void	write_error(int n);
-void	parsing(int ac, char **av, t_all *all);
+// void	parsing(int ac, char **av, t_all *all);
+void	parsing(int fd, t_all *all);
 void	draw_mini_map(t_all *all);
 void	my_mlx_pixel_put(t_all *all, int x, int y, int color);
 void	init_all(t_all *all);
@@ -146,7 +148,7 @@ int		valide_option(char *str);
 bool	files_exist(t_info *info);
 bool	init_info(t_info *info, int type, char *line);
 bool	parse_option(int fd, t_info *info);
-
+bool valid_line(char *line);
 
 //libft 
 int		ft_strncmp(const char *s1, const char *s2, size_t n);

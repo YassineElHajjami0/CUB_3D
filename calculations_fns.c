@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "get_next_line/get_next_line.h"
 
 void	my_mlx_pixel_put(t_all *all, int x, int y, int color)
 {

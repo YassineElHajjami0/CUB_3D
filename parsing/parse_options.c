@@ -72,7 +72,6 @@ bool    files_exist(t_info *info)
     return (true);
 }
 
-
 bool    check_range(t_info *info, int type)
 {
     int *n;
@@ -92,16 +91,47 @@ bool    check_range(t_info *info, int type)
     return (true);
 }
 
-bool    init_rgb(t_info *info, int type, char *line)
+bool    valid_rgb(char *rgb_value)
 {
-    char *rgb_value;
-    int i = 0;
+    int i;
     int flag;
     int number;
 
+//220    ,   100      ,   0
+    i = 0;
     number = 0;
-    rgb_value = ft_strtrim(line, " \t\r\n");
     while (rgb_value[i])
+    {
+        flag = 0;
+        while (rgb_value[i] && ft_isdigit(rgb_value[i]))
+        {
+            flag = 1;
+            i++;
+        }
+        if (!flag)
+            return (false);
+        number++;
+        while (rgb_value[i] && number < 3)
+        {
+            while (is_white_space(rgb_value[i]))
+                i++;
+            if (ft_isdigit(rgb_value[i]))
+                break ;
+            if (rgb_value[i] != ',')
+                return (false);
+            else
+            {
+                if (flag == 0)
+                    return (false);
+                flag = 0;
+                i++;
+            }
+        }
+    }
+    return (number == 3);
+}
+/*
+while (rgb_value[i])
     {
         while (rgb_value[i] && is_white_space(rgb_value[i]))
             i++;
@@ -127,36 +157,41 @@ bool    init_rgb(t_info *info, int type, char *line)
     }
     if (number != 3)
         return (false);
+*/
+
+bool    init_rgb(t_info *info, int type, char *line)
+{
+    char *rgb_value;
+    int i;
+    int flag;
+    int number;
+    int *n;
+
+    rgb_value = ft_strtrim(line, " \t\r\n");
+    if (!valid_rgb(rgb_value))
+        return (false);
     i = 0;
-    number = 0;
-    while (number < 3)
+    number = -1;
+    n = info->ceil;
+    if (type == 5)
+        n = info->floor;
+    while (++number < 3)
     {
-        if (type == 5)
-        {
-            if (info->floor[number] != -1)
-                return (false);
-            info->floor[number] = ft_atoi(rgb_value+ i);
-        }
-        else
-        {
-            if (info->ceil[number] != -1)
-                return (false);
-            info->ceil[number] = ft_atoi(rgb_value+ i);
-        }
+        if (n[number] != -1)
+            return (false);
+        n[number] = ft_atoi(rgb_value+ i);
         while (rgb_value[i] && (ft_isdigit(rgb_value[i]) || is_white_space(rgb_value[i])))
             i++;
         if (rgb_value[i] == ',')
             i++;
-        number++;
     }
-    if (!check_range(info, type))
-        return (false);
-    return (true);
+    return (check_range(info, type));
 }
 
 //what is "\r"
 bool    init_info(t_info *info, int type, char *line)
 {
+
     if (type == 1 && !info->north) // "NO "
         info->north = ft_strtrim(line + 3, " \t\r\n");
     else if (type == 2 && !info->south)
@@ -176,10 +211,11 @@ bool    init_info(t_info *info, int type, char *line)
 bool    parse_option(int fd, t_info *info)
 {
     char *line;
-    int i = 0; //-> 6
+    int i;
     int j;
     int type;
 
+    i = 0;
     while (i < 6)
     {
         line = get_next_line(fd);
@@ -194,12 +230,8 @@ bool    parse_option(int fd, t_info *info)
             if (!init_info(info, type, line + j))
                 return (false);            
             i++;
-            if (i == 5)
-                type = 0;
         }
     }
-    if (!files_exist(info))
-        return (false);
-    return (true);
+    return (files_exist(info));
 }
 

@@ -144,16 +144,22 @@ int	main(int ac, char **av)
 	t_info *info;
 	int		fd;
 
+//.ber
+
 	info = get_info();
 	fd = open(av[1], O_RDONLY);
 	//parsing
-	printf("%d", parse_option(fd, info));
-	exit(1);
+
+parse_option(fd, info);
 	//launching the game 
 
 	all = malloc(sizeof(t_all));
+	all->choosed_map = av[1];
+	// parsing(ac, av, all);
+
+	parsing(fd, all);
+	close(fd);
 	init_all(all);
-	parsing(ac, av, all);
 	init_player(all);
 	mlx_hook(all->win, 2, 0, key_hook, all);
 	mlx_hook(all->win, 3, 0, key_released, all);

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include "../get_next_line/get_next_line.h"
 
 void init_all(t_all *all)
 {

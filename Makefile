@@ -4,7 +4,7 @@ CFLAGS =  -lmlx -framework OpenGL -framework AppKit -g
 CC = cc
 
 SRC = cub3d.c \
-	libft.c \
+	libft/utils.c \
 	libft/split.c \
 	parsing/parsing.c \
 	parsing/parse_options.c \

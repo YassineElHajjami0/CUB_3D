@@ -1,5 +1,4 @@
 #include "../cub3d.h"
-#include "../get_next_line/get_next_line.h"
 
 void	draw_line(t_all *all, double x, double y, double endx, double endy)
 {

@@ -19,21 +19,24 @@ void write_error(int n)
     exit(1);
 }
 
-char **get_linee(char *choosedmap)
+// char **get_linee(char *choosedmap)
+char **get_linee(int fd)
 {
-    int fd;
+    // int fd;
     char *line;
     char *str;
 
     line = NULL;
     str = ft_strdup("");
-    fd = open(choosedmap, O_RDWR);
-    if (fd == -1)
-    {
-        write(2, "Eroor\n", 6);
-        exit(1);
-    }
+    // fd = open(choosedmap, O_RDWR);
+    // if (fd == -1)
+    // {
+    //     write(2, "Eroor\n", 6);
+    //     exit(1);
+    // }
     line = get_next_line(fd);
+    while (!valid_line(line))
+        line = get_next_line(fd);
     while (line)
     {
         if (line[0] == '\n')
@@ -115,20 +118,22 @@ void analyse_map(t_all *all)
 }
 
 void 
-parsing(int ac, char **av, t_all *all)
+// parsing(int ac, char **av, t_all *all)
+parsing(int fd, t_all *all)
 {
     int i;
 
     i = 0;
     all->number_lines = 0;
-    if (ac != 2)
-        write_error(2);
-    while (av[1][i])
-        i++;
+    // if (ac != 2)
+    //     write_error(2);
+    // while (av[1][i])
+    //     i++;
     i--;
-    //.ber
-    all->choosed_map = av[1];
-    all->map = get_linee(all->choosed_map);
+    
+    // all->choosed_map = av[1];
+    // all->map = get_linee(all->choosed_map);
+    all->map = get_linee(fd);
     while (all->map[all->number_lines])
         all->number_lines++;
     // analyse_map(all);
