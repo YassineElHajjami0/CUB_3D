@@ -22,6 +22,7 @@ void init_all(t_all *all, t_info *info)
     all->player->turn_direction = 0;
     all->player->move_speed = 10;
 
+
     all->data.img = mlx_new_image(all->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
     all->data.addr = mlx_get_data_addr(all->data.img, &all->data.bits_per_pixel,
         &all->data.line_length, &all->data.endian);
@@ -29,12 +30,15 @@ void init_all(t_all *all, t_info *info)
     all->north.img = mlx_xpm_file_to_image(all->mlx, info->north, &(all->z), &(all->k));
     all->north.addr = mlx_get_data_addr(all->north.img, &all->north.bits_per_pixel, &all->north.line_length, &all->north.endian);
     all->north_array = (unsigned int *)all->north.addr;
+
     all->east.img = mlx_xpm_file_to_image(all->mlx, info->east, &(all->z), &(all->k));
     all->east.addr = mlx_get_data_addr(all->east.img, &all->east.bits_per_pixel, &all->east.line_length, &all->east.endian);
     all->east_array = (unsigned int *)all->east.addr;
+
     all->west.img = mlx_xpm_file_to_image(all->mlx, info->west, &(all->z), &(all->k));
     all->west.addr = mlx_get_data_addr(all->west.img, &all->west.bits_per_pixel, &all->west.line_length, &all->west.endian);
     all->west_array = (unsigned int *)all->west.addr;
+
     all->south.img = mlx_xpm_file_to_image(all->mlx, info->south, &(all->z), &(all->k));
     all->south.addr = mlx_get_data_addr(all->south.img, &all->south.bits_per_pixel, &all->south.line_length, &all->south.endian);
     all->south_array = (unsigned int *)all->south.addr;

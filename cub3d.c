@@ -61,43 +61,27 @@ int	ft_exit(void)
 // 	}
 // }
 
-unsigned int get_direction(t_all *all, int column)
+unsigned int *get_direction(t_all *all, int column)
 {
 	if (all->rays[column].ray_angle >= M_PI && all->rays[column].ray_angle <= 2 * M_PI)
 	{
 		//north west east
 		if (!all->rays[column].hitvertical)
 		{
-			return 0xFFF;//north
+			return (all->north_array);//north white
 		}
 		if (all->rays[column].facing_right)
-			return 0x000;//west
-		return 0xff2;//east
+			return (all->east_array);//east dark
+		return (all->west_array);//west red
 	}
 	else 
 	{
 		if (!all->rays[column].hitvertical)
-			return 0xa22;//south
+			return (all->south_array);//south move
 		if (all->rays[column].facing_right)
-			return 0xff2;//east
-		return 0x000;//west
+			return (all->east_array);//east dark
+		return (all->west_array);//west red
 	}
-	// if (all->rays[column].facing_up)
-	// {
-	// 	if (!all->rays[column].hitvertical)
-	// 		return 0xbe5;//north
-	// 	if (all->rays[column].facing_right)
-	// 		return 0x000;//west
-	// 	return 0xff2;//east
-	// }
-	// else
-	// {
-	// 	if (!all->rays[column].hitvertical)
-	// 		return 0xa22;//south
-	// 	if (all->rays[column].facing_right)
-	// 		return 0xff2;//east
-	// 	return 0x000;//west
-	// }
 }
 
 void	draw_column(t_all *all, int column, int start, int end)
@@ -105,7 +89,7 @@ void	draw_column(t_all *all, int column, int start, int end)
 	double	offset;
 	int		i;
 	double	line;
-	unsigned int direction;
+	unsigned int *direction;
 
 	if (all->rays[column].hitvertical)
 		offset = fmod(all->rays[column].coor.y , 64);
@@ -116,12 +100,12 @@ void	draw_column(t_all *all, int column, int start, int end)
 	while (i < end)
 	{	
 		line = (i - start) * 64 / all->rays[column].column_height;
-		// my_mlx_pixel_put(all, column,i, direction[(int)offset + (64 * (int)line)]);
-		my_mlx_pixel_put(all, column,i, direction);
+		my_mlx_pixel_put(all, column,i, direction[(int)offset + (64 * (int)line)]);
+		// my_mlx_pixel_put(all, column,i, direction);
 		i++;
 	}
 }
-
+ 
 
 void	rendering_walls(t_all *all)
 {

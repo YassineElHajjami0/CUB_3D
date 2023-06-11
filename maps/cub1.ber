@@ -1,10 +1,10 @@
 NO ./textures/north.xpm
 
-SO ./textures/north.xpm
+SO ./textures/south.xpm
 
-WE ./textures/north.xpm
+WE ./textures/west.xpm
 
-EA ./textures/north.xpm
+EA ./textures/east.xpm
 
 F 220, 100     ,    0
 
