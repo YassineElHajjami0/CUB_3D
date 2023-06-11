@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 12:52:44 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/06/05 09:08:11 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/06/11 11:48:50 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,83 @@ int	ft_exit(void)
 	exit(0);
 }
 
+// unsigned int	*get_direction(t_all *all, int column)
+// {
+// 	if (all->rays[column].facing_up)
+// 	{
+// 		if (!all->rays[column].hitvertical)
+// 			return all->north_array;
+// 		if (all->rays[column].facing_right)
+// 			return all->west_array;
+// 		return all->east_array;
+// 	}
+// 	else
+// 	{
+// 		if (!all->rays[column].hitvertical)
+// 			return all->south_array;
+// 		if (all->rays[column].facing_right)
+// 			return all->east_array;
+// 		return all->west_array;
+// 	}
+// }
+
+unsigned int get_direction(t_all *all, int column)
+{
+	if (all->rays[column].ray_angle >= M_PI && all->rays[column].ray_angle <= 2 * M_PI)
+	{
+		//north west east
+		if (!all->rays[column].hitvertical)
+		{
+			return 0xFFF;//north
+		}
+		if (all->rays[column].facing_right)
+			return 0x000;//west
+		return 0xff2;//east
+	}
+	else 
+	{
+		if (!all->rays[column].hitvertical)
+			return 0xa22;//south
+		if (all->rays[column].facing_right)
+			return 0xff2;//east
+		return 0x000;//west
+	}
+	// if (all->rays[column].facing_up)
+	// {
+	// 	if (!all->rays[column].hitvertical)
+	// 		return 0xbe5;//north
+	// 	if (all->rays[column].facing_right)
+	// 		return 0x000;//west
+	// 	return 0xff2;//east
+	// }
+	// else
+	// {
+	// 	if (!all->rays[column].hitvertical)
+	// 		return 0xa22;//south
+	// 	if (all->rays[column].facing_right)
+	// 		return 0xff2;//east
+	// 	return 0x000;//west
+	// }
+}
+
 void	draw_column(t_all *all, int column, int start, int end)
 {
 	double	offset;
 	int		i;
 	double	line;
+	unsigned int direction;
 
 	if (all->rays[column].hitvertical)
 		offset = fmod(all->rays[column].coor.y , 64);
 	else
 		offset = fmod(all->rays[column].coor.x , 64);
-
+	direction = get_direction(all, column);
 	i = start;
 	while (i < end)
 	{	
 		line = (i - start) * 64 / all->rays[column].column_height;
-		my_mlx_pixel_put(all, column,i, all->north_array[(int)offset + (64 * (int)line)]);
+		// my_mlx_pixel_put(all, column,i, direction[(int)offset + (64 * (int)line)]);
+		my_mlx_pixel_put(all, column,i, direction);
 		i++;
 	}
 }
@@ -159,7 +220,7 @@ parse_option(fd, info);
 
 	parsing(fd, all);
 	close(fd);
-	init_all(all);
+	init_all(all, info);
 	init_player(all);
 	mlx_hook(all->win, 2, 0, key_hook, all);
 	mlx_hook(all->win, 3, 0, key_released, all);

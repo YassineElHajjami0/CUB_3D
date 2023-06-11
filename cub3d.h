@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 12:37:35 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/06/04 11:51:35 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/06/11 11:15:12 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	write_error(int n);
 void	parsing(int fd, t_all *all);
 void	draw_mini_map(t_all *all);
 void	my_mlx_pixel_put(t_all *all, int x, int y, int color);
-void	init_all(t_all *all);
+void	init_all(t_all *all, t_info *info);
 void	init_player(t_all *all);
 void	set_ray(t_all *all, int i);
 void	set_ray_facing_direction(t_ray *ray);

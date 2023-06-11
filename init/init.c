@@ -6,13 +6,13 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 13:22:38 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/06/01 13:43:28 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/06/11 11:14:27 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void init_all(t_all *all)
+void init_all(t_all *all, t_info *info)
 {
     all->mlx = mlx_init();
     all->win = mlx_new_window(all->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "CUB_3D");
@@ -26,9 +26,18 @@ void init_all(t_all *all)
     all->data.addr = mlx_get_data_addr(all->data.img, &all->data.bits_per_pixel,
         &all->data.line_length, &all->data.endian);
 
-    all->north.img = mlx_xpm_file_to_image(all->mlx, "./textures/north.xpm", &(all->z), &(all->k));
+    all->north.img = mlx_xpm_file_to_image(all->mlx, info->north, &(all->z), &(all->k));
     all->north.addr = mlx_get_data_addr(all->north.img, &all->north.bits_per_pixel, &all->north.line_length, &all->north.endian);
     all->north_array = (unsigned int *)all->north.addr;
+    all->east.img = mlx_xpm_file_to_image(all->mlx, info->east, &(all->z), &(all->k));
+    all->east.addr = mlx_get_data_addr(all->east.img, &all->east.bits_per_pixel, &all->east.line_length, &all->east.endian);
+    all->east_array = (unsigned int *)all->east.addr;
+    all->west.img = mlx_xpm_file_to_image(all->mlx, info->west, &(all->z), &(all->k));
+    all->west.addr = mlx_get_data_addr(all->west.img, &all->west.bits_per_pixel, &all->west.line_length, &all->west.endian);
+    all->west_array = (unsigned int *)all->west.addr;
+    all->south.img = mlx_xpm_file_to_image(all->mlx, info->south, &(all->z), &(all->k));
+    all->south.addr = mlx_get_data_addr(all->south.img, &all->south.bits_per_pixel, &all->south.line_length, &all->south.endian);
+    all->south_array = (unsigned int *)all->south.addr;
 }
 
 void    init_player_facing_direction(t_all *all)
