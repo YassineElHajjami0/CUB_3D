@@ -56,10 +56,10 @@ void	draw_squar(t_all *all, double posx , double posy, char character)
 		j = 0;
 		while (j < 64)
 		{
-			if (character == '0' || character == 'N')
-				my_mlx_pixel_put(all, (posx + j) * SCALE, (posy + i) * SCALE, 0x99ff99);
-			else if (character == '1')
+			if (character == '1')
 				my_mlx_pixel_put(all, (posx + j) * SCALE, (posy + i) * SCALE, 0x00aaa0);
+			else
+				my_mlx_pixel_put(all, (posx + j) * SCALE, (posy + i) * SCALE, 0x99ff99);
 			j++;
 		}
 		i++;
@@ -76,13 +76,6 @@ void    draw_mini_map(t_all *all)
 		j = 0;
 		while (j < (int)ft_strlen(all->map[i]))
 		{
-            // if (all->map[i][j] && all->map[i][j] == 'N' && flag)
-            // {
-            //     flag = 0;
-            //     all->player->coor.x = j * 64;
-            //     all->player->coor.y = i * 64;
-			// 	all->player->rotation_angle = 0 * M_PI;
-            // }
 			draw_squar(all, j * 64, i * 64, all->map[i][j]);
 			j++;
 		}

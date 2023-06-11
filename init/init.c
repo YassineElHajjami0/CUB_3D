@@ -47,6 +47,17 @@ void    init_player_facing_direction(t_all *all)
         all->player->facing_right = -1;
 }
 
+double get_rotation_angle(char c)
+{
+    if (c == 'N')
+        return (1.5 * M_PI);
+    if (c == 'S')
+        return (0.5 * M_PI);
+    if (c == 'W')
+        return (M_PI);
+    return (0);
+}
+
 void init_player(t_all *all)
 {
     int i;
@@ -54,18 +65,19 @@ void init_player(t_all *all)
     static int flag;
 
     i = -1;
-    while (++i < all->number_lines && !flag)
+    while (++i < all->number_lines)
     {
         j = -1;
         while (++j < (int)ft_strlen(all->map[i]))
         {
-            if (all->map[i][j] && all->map[i][j] == 'N')
+            if (all->map[i][j] && (all->map[i][j] == 'N' || all->map[i][j] == 'S' || all->map[i][j] == 'E' || all->map[i][j] == 'W'))
             {
+                if (flag)
+                    write_error(2);
                 all->player->coor.x = j * 64;
                 all->player->coor.y = i * 64;
-                all->player->rotation_angle = M_PI / 2;
+                all->player->rotation_angle = get_rotation_angle(all->map[i][j]);
                 flag = 1;
-                break ;
             }
         }
     }

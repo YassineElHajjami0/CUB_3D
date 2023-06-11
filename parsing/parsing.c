@@ -108,15 +108,11 @@ void analyse_map(t_all *all)
     int j;
 
     i = 0;
-    printf("all->numberLines = %d\n", all->number_lines);
     while (all->map[i])
     {
         j = 0;
         while (all->map[i][j])
         {
-            // if ((i == 0 && (all->map[i][j] != '1' && !is_white_space(all->map[i][j])))
-            //     || (i == (all->number_lines - 1) && (all->map[i][j] != '1' && !is_white_space(all->map[i][j]))))
-            //     write_error(2);
             if ((i == 0 || i == all->number_lines - 1))
             {
                 if (!is_white_space(all->map[i][j]) && all->map[i][j] != '1')
@@ -124,33 +120,23 @@ void analyse_map(t_all *all)
             }
             else if (!valid_character(all->map, i , j))
                 write_error(2);
-            // if (!start_end_with_one(all->map))
-            //     write_error(2);
             j++;
         }
         i++;
     }
 }
 
-// parsing(int ac, char **av, t_all *all)
 void    parsing(int fd, t_all *all)
 {
     int i;
+    int found;
 
+    found = 0;
     i = 0;
     all->number_lines = 0;
-    // if (ac != 2)
-    //     write_error(2);
-    // while (av[1][i])
-    //     i++;
-    i--;
-    
-    // all->choosed_map = av[1];
-    // all->map = get_linee(all->choosed_map);
+    i--;    
     all->map = get_linee(fd);
     while (all->map[all->number_lines])
         all->number_lines++;
     analyse_map(all);
-    tba3_map(all);
-    exit(1);
 }
