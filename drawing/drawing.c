@@ -19,7 +19,7 @@ void	draw_line(t_all *all, double x, double y, double endx, double endy)
 	y_step = delta_y / steps;
 	while (steps--)
 	{
-		my_mlx_pixel_put(all, x * SCALE, y * SCALE, 0xff0);
+		my_mlx_pixel_put(all, x * SCALE, y * SCALE, 0x871F78);
 		x += x_step;
 		y += y_step;
 	}
@@ -37,7 +37,7 @@ void	draw_player(t_all *all)
 		j = -5;
 		while (j < 5)
 		{			
-			my_mlx_pixel_put(all, (all->player->coor.x + j) * SCALE , (all->player->coor.y+ i) * SCALE, 0x005599);
+			my_mlx_pixel_put(all, (all->player->coor.x + j) * SCALE , (all->player->coor.y+ i) * SCALE, 0x6264B7);
 			j++;
 		}
 		i++;
@@ -57,9 +57,9 @@ void	draw_squar(t_all *all, double posx , double posy, char character)
 		while (j < 64)
 		{
 			if (character == '1')
-				my_mlx_pixel_put(all, (posx + j) * SCALE, (posy + i) * SCALE, 0x00aaa0);
-			else
-				my_mlx_pixel_put(all, (posx + j) * SCALE, (posy + i) * SCALE, 0x99ff99);
+				my_mlx_pixel_put(all, (posx + j) * SCALE, (posy + i) * SCALE, 0x4E1852);
+			else if (character != ' ')
+				my_mlx_pixel_put(all, (posx + j) * SCALE, (posy + i) * SCALE, 0xdfbdff);
 			j++;
 		}
 		i++;

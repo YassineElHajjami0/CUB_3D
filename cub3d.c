@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 12:52:44 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/06/11 11:48:50 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/06/11 13:55:41 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ void	draw_floor(t_all *all)
 		start = WINDOW_HEIGHT / 2 + all->rays[i].column_height / 2;
 		while (start <= WINDOW_HEIGHT)
 		{
-			my_mlx_pixel_put(all, i, start, 0xaf9058);
+			my_mlx_pixel_put(all, i, start, 0x55165E);
 			start++;
 		}
 	}
@@ -144,7 +144,7 @@ void	draw_ceil(t_all *all)
 		start = 0;
 		while (start <= WINDOW_HEIGHT / 2 - all->rays[all->i].column_height / 2)
 		{
-			my_mlx_pixel_put(all, i, start, 0xdfebff);
+			my_mlx_pixel_put(all, i, start, 0x06265C);
 			start++;
 		}
 	}

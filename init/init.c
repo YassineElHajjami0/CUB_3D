@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 13:22:38 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/06/11 11:14:27 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/06/11 13:59:41 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void init_all(t_all *all, t_info *info)
     all->mlx = mlx_init();
     all->win = mlx_new_window(all->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "CUB_3D");
     all->player = malloc(sizeof(t_player));
-    all->player->rotation_speed = 2 * (M_PI / 180);
+    all->player->rotation_speed = 4 * (M_PI / 180);
     all->player->walk_direction = 0;
     all->player->turn_direction = 0;
-    all->player->move_speed = 10;
+    all->player->move_speed = 20;
 
 
     all->data.img = mlx_new_image(all->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
