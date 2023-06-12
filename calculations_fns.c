@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 13:47:07 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/06/04 09:05:43 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/06/12 11:39:24 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ bool	hitted_with_wall(double x, double y, t_all *all)
 	if (line >= all->number_lines || col >= (int)ft_strlen(all->map[line]))
 		return (true);
 	if (all->map[line][col] == '1')
+	{
 		return (true);
+	}
 	return (false);
 }
 
@@ -79,8 +81,12 @@ void	update_coordination(t_all *all)
 	column = (int)(new_coordination.x / 64);
 	if (line >= all->number_lines || column >= (int)ft_strlen(all->map[line]))
 		return ;
+	
 	if (hitted_with_wall(new_coordination.x, new_coordination.y - 5, all))
+	{
 		return ;
+
+	}
 	if (hitted_with_wall(new_coordination.x + 5, new_coordination.y, all))
 		return ;
 	if (hitted_with_wall(new_coordination.x, new_coordination.y + 5, all))
