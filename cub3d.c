@@ -193,9 +193,12 @@ int	main(int ac, char **av)
 
 	info = get_info();
 	fd = open(av[1], O_RDONLY);
+	if (fd == -1)
+		write_error(2);
 	//parsing
 
-parse_option(fd, info);
+	if (!parse_option(fd, info))
+		write_error(2);
 	//launching the game 
 
 	all = malloc(sizeof(t_all));

@@ -104,9 +104,9 @@ unsigned int	get_color(t_all *all, int x, int y)
 		return (0x4E1852);
 
 
-	if (all->map[(int)(posy / 64)][(int)(posx / 64)] == '0')
-		return (0xdfbdff);
-	return (0x4E1852);
+	if (all->map[(int)(posy / 64)][(int)(posx / 64)] == '1')
+		return (0x4E1852);
+	return (0xdfbdff);
 }
 
 void    draw_mini_map(t_all *all)

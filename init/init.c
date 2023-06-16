@@ -20,7 +20,7 @@ void init_all(t_all *all, t_info *info)
     all->player->rotation_speed = 4 * (M_PI / 180);
     all->player->walk_direction = 0;
     all->player->turn_direction = 0;
-    all->player->move_speed = 5;
+    all->player->move_speed = 50;
 
 
     all->data.img = mlx_new_image(all->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -87,8 +87,8 @@ void init_player(t_all *all)
             {
                 if (flag)
                     write_error(2);
-                all->player->coor.x = j * 64;
-                all->player->coor.y = i * 64;
+                all->player->coor.x = j * 64 + 32;
+                all->player->coor.y = i * 64 + 32;
                 all->player->rotation_angle = get_rotation_angle(all->map[i][j]);
                 flag = 1;
             }

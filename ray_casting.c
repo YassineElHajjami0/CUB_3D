@@ -31,7 +31,10 @@ t_point get_vertical_touch(t_all *all, int i)
         y_step *= -1;
     if (all->rays[i].facing_down && y_step < 0)
         y_step *= -1;
-    while (first.x >= 0 && first.x < WINDOW_WIDTH && first.y >= 0 && first.y < WINDOW_HEIGHT)
+    // while (first.x >= 0 && first.x < WINDOW_WIDTH && first.y >= 0 && first.y < WINDOW_HEIGHT)
+    // int row = floor(first.y / 64);
+    // int column = floor(first.x / 64);
+    while (1)
     {
         p = first.x;
         if (all->rays[i].facing_left)
@@ -44,8 +47,8 @@ t_point get_vertical_touch(t_all *all, int i)
             first.y += y_step;
         }
     }
-    first.x = -1;
-    first.y = -1;
+    // first.x = -1;
+    // first.y = -1;
     return (first);
 }
 
@@ -70,7 +73,8 @@ t_point get_horizontal_touch(t_all *all, int i)
         x_step *= -1;
     if (all->rays[i].facing_left && x_step > 0)
         x_step *= -1;
-    while (first.x >= 0 && first.x < WINDOW_WIDTH && first.y >= 0 && first.y < WINDOW_HEIGHT)
+    // while (first.x >= 0 && first.x < WINDOW_WIDTH && first.y >= 0 && first.y < WINDOW_HEIGHT)
+    while (1)
     {
         p = first.y;
         if (all->rays[i].facing_up)
@@ -85,8 +89,10 @@ t_point get_horizontal_touch(t_all *all, int i)
             first.y += y_step;
         }
     }
-    first.x = -1;
-    first.y = -1;
+
+    // printf("Hello\n");
+    // first.x = -1;
+    // first.y = -1;
     return (first);
 }
 
