@@ -62,7 +62,6 @@ void	player_rotation_and_facing(t_all *all, int *step,
 		rotation_angle += 2 * M_PI;
 
 	*step = all->player->walk_direction * all->player->move_speed;
-	printf("%d %d\n",all->player->walk_direction, *step);
 	new_coordination->x = all->player->coor.x + \
 		cos(rotation_angle) * (*step);
 	new_coordination->y = all->player->coor.y + \

@@ -26,8 +26,8 @@ int	key_hook(int key, t_all *all)
 	}
 	else if (key == D)
 	{
-		all->player->flag = -1;
-		all->player->walk_direction = 1;
+		all->player->flag = 1;
+		all->player->walk_direction = -1;
 	}
 	else if (key == RIGHT)
 		all->player->turn_direction = 1;
