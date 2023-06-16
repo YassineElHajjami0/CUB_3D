@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 13:22:38 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/06/12 11:37:53 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/06/16 12:10:59 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void init_all(t_all *all, t_info *info)
     all->player->rotation_speed = 4 * (M_PI / 180);
     all->player->walk_direction = 0;
     all->player->turn_direction = 0;
-    all->player->move_speed = 50;
+    all->player->flag = 0;
+    all->player->move_speed = 5;
 
 
     all->data.img = mlx_new_image(all->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -44,21 +45,6 @@ void init_all(t_all *all, t_info *info)
     all->south_array = (unsigned int *)all->south.addr;
 }
 
-void    init_player_facing_direction(t_all *all)
-{
-    if (all->player->rotation_angle >= M_PI 
-        && all->player->rotation_angle <= 2 * M_PI)
-        all->player->facing_up = 1;
-    else
-        all->player->facing_up = -1;
-    if ((all->player->rotation_angle >= 1.5 * M_PI 
-        && all->player->rotation_angle <= 2 * M_PI)
-        || (all->player->rotation_angle >= 0 
-        && all->player->rotation_angle <= 0.5 * M_PI))
-        all->player->facing_right = 1;
-    else
-        all->player->facing_right = -1;
-}
 
 double get_rotation_angle(char c)
 {
@@ -94,7 +80,6 @@ void init_player(t_all *all)
             }
         }
     }
-    init_player_facing_direction(all);
 }
 
 

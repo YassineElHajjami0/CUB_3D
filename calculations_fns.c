@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 13:47:07 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/06/12 11:39:24 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/06/16 11:58:56 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,29 +45,28 @@ bool	hitted_with_wall(double x, double y, t_all *all)
 void	player_rotation_and_facing(t_all *all, int *step,
 	t_point *new_coordination)
 {
+	double rotation_angle;
+
+	all->player->rotation_angle += all->player->turn_direction * \
+		all->player->rotation_speed;
+
 	if (all->player->rotation_angle > 2 * M_PI)
 		all->player->rotation_angle -= 2 * M_PI;
 	if (all->player->rotation_angle < 0)
 		all->player->rotation_angle += 2 * M_PI;
-	if (all->player->rotation_angle >= M_PI
-		&& all->player->rotation_angle <= 2 * M_PI)
-		all->player->facing_up = 1;
-	else
-		all->player->facing_up = -1;
-	if ((all->player->rotation_angle >= 1.5 * M_PI
-			&& all->player->rotation_angle <= 2 * M_PI)
-		|| (all->player->rotation_angle >= 0
-			&& all->player->rotation_angle <= 0.5 * M_PI))
-		all->player->facing_right = 1;
-	else
-		all->player->facing_right = -1;
-	all->player->rotation_angle += all->player->turn_direction * \
-		all->player->rotation_speed;
+
+	rotation_angle = all->player->rotation_angle + (double)all->player->flag * M_PI / 2;
+	if (rotation_angle > 2 * M_PI)
+		rotation_angle -= 2 * M_PI;
+	if (rotation_angle < 0)
+		rotation_angle += 2 * M_PI;
+
 	*step = all->player->walk_direction * all->player->move_speed;
+	printf("%d %d\n",all->player->walk_direction, *step);
 	new_coordination->x = all->player->coor.x + \
-		cos(all->player->rotation_angle) * (*step);
+		cos(rotation_angle) * (*step);
 	new_coordination->y = all->player->coor.y + \
-		sin(all->player->rotation_angle) * (*step);
+		sin(rotation_angle) * (*step);
 }
 
 void	update_coordination(t_all *all)

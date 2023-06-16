@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 12:37:35 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/06/12 11:36:28 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/06/16 11:31:12 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ typedef struct s_player
 	double	rotation_speed;
 	int		facing_up;
 	int		facing_right;
+
+	int flag;
 }	t_player;
 
 typedef struct s_ray

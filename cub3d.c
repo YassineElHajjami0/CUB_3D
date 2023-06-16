@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 12:52:44 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/06/11 13:55:41 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/06/16 12:12:37 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,21 @@ int	key_hook(int key, t_all *all)
 	else if (key == S)
 		all->player->walk_direction = -1;
 	else if (key == A)
-		all->player->turn_direction = -1;
+	{
+		all->player->flag = 1;
+		all->player->walk_direction = 1;
+	}
 	else if (key == D)
+	{
+		all->player->flag = -1;
+		all->player->walk_direction = 1;
+	}
+	else if (key == RIGHT)
 		all->player->turn_direction = 1;
+	else if (key == LEFT)
+		all->player->turn_direction = -1;
+
+
 	else if (key == 53)
 		exit(0);
 	return (0);
@@ -33,6 +45,7 @@ int	key_released(int keycode, t_all *all)
 	(void)keycode;
 	all->player->turn_direction = 0;
 	all->player->walk_direction = 0;
+	all->player->flag = 0;
 	return (0);
 }
 
