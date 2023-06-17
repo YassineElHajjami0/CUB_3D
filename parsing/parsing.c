@@ -96,23 +96,33 @@ int surrounded_with_walls(char** map, int i , int j)
     int right = j + 1;
     int left = j - 1;
 
+
     if (c == '1')
         return (1);
     if (valid_char(c) || is_white_space(c))
     {
-        if (!valid_surrounded(c, map[top][j]) || !valid_surrounded(c, map[down][j]))
+        if (j < ft_strlen(map[top]) && !valid_surrounded(c, map[top][j]))
+        {
+            printf("Top\n");
             return (0);
+        }
+        if (j < ft_strlen(map[down]) && !valid_surrounded(c, map[down][j]))
+        {
+            printf("j %d len %d\n", j, (int)ft_strlen(map[down]));
+            return (0);
+        }
         if (right == ft_strlen(map[i]) || left == -1)
         {
             if (is_white_space(c))
                 return (1);
             return (0);
         }
+        // printf("--------\n");
         if (!valid_surrounded(c, map[i][right]) || !valid_surrounded(c, map[i][left]))
         {
-            printf("|%c| |%c| |%c| i : %d left %d\n", c, map[i][right], map[i][left], i, left);
             return (0);
         }
+        // printf("$$$$$$$$$\n");
         return (1);
     }
     return (0);
@@ -135,7 +145,9 @@ void analyse_map(t_all *all)
                     write_error(2);
             }
             else if (!surrounded_with_walls(all->map, i , j))
+            {
                 write_error(2);
+            }
             j++;
         }
         i++;
