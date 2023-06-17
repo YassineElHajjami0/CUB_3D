@@ -71,33 +71,44 @@ void tba3_map(t_all *all)
     }
 }
 
-int valid_character(char** map, int i , int j)
+
+bool valid_char(char c)
+{
+    return (c == '0' || c == 'N' || c == 'S' || c == 'W' || c == 'E');
+}
+
+bool valid_surrounded(char c1, char c2)
+{
+    if (c2 == '1')
+        return (true);
+    if (is_white_space(c1) && is_white_space(c2))
+        return (true);
+    if (valid_char(c1) && valid_char(c2))
+        return (true);
+    return (false);
+}
+
+int surrounded_with_walls(char** map, int i , int j)
 {
     char c = map[i][j];
     int top = i - 1;
     int down = i + 1;
     int right = j + 1;
     int left = j - 1;
-    char    c2;
 
-    if (c == '0' || c == 'N' || c == 'S' || c == 'W' || c == 'E')
+    if (c == '1')
+        return (1);
+    if (valid_char(c) || is_white_space(c))
     {
-        c2 = map[top][j];
-        if (c2 != '1' && c2 != '0' && c2 != 'N' && c2 != 'S' && c2 != 'W' &&  c2 != 'E')
-            return (0);
-        c2 = map[down][j];
-        if (c2 != '1' && c2 != '0' && c2 != 'N' && c2 != 'S' && c2 != 'W' &&  c2 != 'E')
+        if (!valid_surrounded(c, map[top][j]) || !valid_surrounded(c, map[down][j]))
             return (0);
         if (right == ft_strlen(map[i]) || left == -1)
             return (0);
-        c2 = map[i][right];
-        if (c2 != '1' && c2 != '0' && c2 != 'N' && c2 != 'S' && c2 != 'W' &&  c2 != 'E')
+        if (!valid_surrounded(c, map[i][right]) || !valid_surrounded(c, map[i][left]))
             return (0);
-        c2 = map[i][left];
-        if (c2 != '1' && c2 != '0' && c2 != 'N' && c2 != 'S' && c2 != 'W' &&  c2 != 'E')
-            return (0);
+        return (1);
     }
-    return (1);
+    return (0);
 }
 
 
@@ -118,7 +129,7 @@ void analyse_map(t_all *all)
                 if (!is_white_space(all->map[i][j]) && all->map[i][j] != '1')
                     write_error(2);
             }
-            else if (!valid_character(all->map, i , j))
+            else if (!surrounded_with_walls(all->map, i , j))
                 write_error(2);
             j++;
         }
