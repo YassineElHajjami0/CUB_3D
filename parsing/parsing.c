@@ -103,9 +103,16 @@ int surrounded_with_walls(char** map, int i , int j)
         if (!valid_surrounded(c, map[top][j]) || !valid_surrounded(c, map[down][j]))
             return (0);
         if (right == ft_strlen(map[i]) || left == -1)
+        {
+            if (is_white_space(c))
+                return (1);
             return (0);
+        }
         if (!valid_surrounded(c, map[i][right]) || !valid_surrounded(c, map[i][left]))
+        {
+            printf("|%c| |%c| |%c| i : %d left %d\n", c, map[i][right], map[i][left], i, left);
             return (0);
+        }
         return (1);
     }
     return (0);
