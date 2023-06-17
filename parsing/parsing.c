@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 15:11:37 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/06/10 15:56:51 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/06/17 11:47:31 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,6 @@ int valid_character(char** map, int i , int j)
     }
     return (1);
 }
-
-
 
 void analyse_map(t_all *all)
 {
