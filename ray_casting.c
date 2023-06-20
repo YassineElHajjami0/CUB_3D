@@ -6,13 +6,13 @@
 /*   By: amentag <amentag@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 13:30:13 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/06/20 20:11:23 by amentag          ###   ########.fr       */
+/*   Updated: 2023/06/20 20:14:59 by amentag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void    increament(t_point *point, t_point p)
+void    increment(t_point *point, t_point p)
 {
     point->x += p.x;
     point->y += p.y;   
@@ -42,7 +42,7 @@ t_point get_vertical_touch(t_all *all, int i)
             p = first.x - 1;
         if (hitted_with_wall(p, first.y, all))
             return (first);
-        increament(&first, steps);
+        increment(&first, steps);
     }
     return (first);
 }
@@ -71,7 +71,7 @@ t_point get_horizontal_touch(t_all *all, int i)
             p = first.y - 1;
         if (hitted_with_wall(first.x, p, all))
             return (first);
-        increament(&first, steps);
+        increment(&first, steps);
     }
     return (first);
 }

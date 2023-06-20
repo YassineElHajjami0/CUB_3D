@@ -1,5 +1,4 @@
 NAME = cub3d
-# -Wall -Wextra -Werror
 CFLAGS =  -lmlx -framework OpenGL -framework AppKit
 CC = cc
 
@@ -19,7 +18,8 @@ SRC =   drawing/drawing.c \
 		calculations_fns.c \
 		cub3d.c \
 		keys_handler.c \
-		ray_casting.c \
+		ray_casting.c
+
 
 all : $(NAME)
 
