@@ -6,7 +6,7 @@
 /*   By: amentag <amentag@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 12:52:44 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/06/20 19:18:03 by amentag          ###   ########.fr       */
+/*   Updated: 2023/06/20 20:12:47 by amentag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return (1);
+
+	//check .ber
 	info = get_info();
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
