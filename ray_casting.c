@@ -3,37 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amentag <amentag@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 13:30:13 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/06/12 11:36:44 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/06/20 20:11:23 by amentag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void    increament(t_point *point, t_point p)
+{
+    point->x += p.x;
+    point->y += p.y;   
+}
+
 t_point get_vertical_touch(t_all *all, int i)
 {
     t_point first;
-    double  x_step;
-    double  y_step;
+    t_point steps;
     double  p;
 
     first.x = floor(all->player->coor.x / 64) * 64;
     if (all->rays[i].facing_right)
         first.x += 64;
     first.y = tan(all->rays[i].ray_angle) * (first.x - all->player->coor.x) + all->player->coor.y;
-    x_step = 64;
+    steps.x = 64;
     if (all->rays[i].facing_left)
-        x_step *= -1;
-    y_step = tan(all->rays[i].ray_angle) * 64;
-    if (all->rays[i].facing_up && y_step > 0)
-        y_step *= -1;
-    if (all->rays[i].facing_down && y_step < 0)
-        y_step *= -1;
-    // while (first.x >= 0 && first.x < WINDOW_WIDTH && first.y >= 0 && first.y < WINDOW_HEIGHT)
-    // int row = floor(first.y / 64);
-    // int column = floor(first.x / 64);
+        steps.x *= -1;
+    steps.y = tan(all->rays[i].ray_angle) * 64;
+    if ((all->rays[i].facing_up && steps.y > 0) ||\
+        (all->rays[i].facing_down && steps.y < 0))
+        steps.y *= -1;
     while (1)
     {
         p = first.x;
@@ -41,58 +42,37 @@ t_point get_vertical_touch(t_all *all, int i)
             p = first.x - 1;
         if (hitted_with_wall(p, first.y, all))
             return (first);
-        else
-        {
-            first.x += x_step;
-            first.y += y_step;
-        }
+        increament(&first, steps);
     }
-    // first.x = -1;
-    // first.y = -1;
     return (first);
 }
 
 t_point get_horizontal_touch(t_all *all, int i)
 {
     t_point first;
-    double x_step;
-    double y_step;
+    t_point steps;
     double p;
 
     first.y = floor(all->player->coor.y / 64) * 64;
     if (all->rays[i].facing_down)
         first.y += 64;
-    first.x = (first.y - all->player->coor.y) / tan(all->rays[i].ray_angle) + all->player->coor.x; /// here
-    y_step = 64;
-    x_step = 64 / tan(all->rays[i].ray_angle);
-    // printf("first y = %f\n, first x = %f\n, y_step = %f\n, x_step = %f\n", first.y, first.x, y_step, x_step);
-    // exit(1);
+    first.x = (first.y - all->player->coor.y) / tan(all->rays[i].ray_angle) + all->player->coor.x;
+    steps.y = 64;
+    steps.x = 64 / tan(all->rays[i].ray_angle);
     if (all->rays[i].facing_up)
-        y_step *= -1;
-    if (all->rays[i].facing_right && x_step < 0)
-        x_step *= -1;
-    if (all->rays[i].facing_left && x_step > 0)
-        x_step *= -1;
-    // while (first.x >= 0 && first.x < WINDOW_WIDTH && first.y >= 0 && first.y < WINDOW_HEIGHT)
+        steps.y *= -1;
+    if ((all->rays[i].facing_right && steps.x < 0) || \
+        (all->rays[i].facing_left && steps.x > 0))
+        steps.x *= -1;
     while (1)
     {
         p = first.y;
         if (all->rays[i].facing_up)
             p = first.y - 1;
-        // printf("all->player->facing_up = %d, first x = %f\n first y = %f\np = %f\n",all->player->facing_up, first.x, first.y, p);
-        // exit(1);
         if (hitted_with_wall(first.x, p, all))
             return (first);
-        else
-        {
-            first.x += x_step;
-            first.y += y_step;
-        }
+        increament(&first, steps);
     }
-
-    // printf("Hello\n");
-    // first.x = -1;
-    // first.y = -1;
     return (first);
 }
 
@@ -135,7 +115,8 @@ void set_ray_facing_direction(t_ray *ray)
         ray->facing_up = 1;
     else
         ray->facing_down = 1;
-    if ((ray->ray_angle >= 1.5 * M_PI && ray->ray_angle <= 2 * M_PI) || (ray->ray_angle >= 0 && ray->ray_angle <= 0.5 * M_PI))
+    if ((ray->ray_angle >= 1.5 * M_PI && ray->ray_angle <= 2 * M_PI) \
+        || (ray->ray_angle >= 0 && ray->ray_angle <= 0.5 * M_PI))
         ray->facing_right = 1;
     else
         ray->facing_left = 1;

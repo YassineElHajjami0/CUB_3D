@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculations_fns.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amentag <amentag@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 13:47:07 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/06/16 11:58:56 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/06/20 19:05:43 by amentag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,39 +28,31 @@ bool	hitted_with_wall(double x, double y, t_all *all)
 	int	line;
 	int	col;
 
-	// if (x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT)
-	// 	return (1);
 	line = floor(y / 64);
 	col = floor(x / 64);
-	if (line < 0 || col < 0 || line >= all->number_lines || col >= (int)ft_strlen(all->map[line]))
+	if (line < 0 || col < 0 || line >= all->number_lines \
+		|| col >= (int)ft_strlen(all->map[line]))
 		return (true);
-	// if (all->map[line][col] == '1')
-	// {
-	// 	return (true);
-	// }
-	// return (false);
 	return (all->map[line][col] == '1');
 }
 
 void	player_rotation_and_facing(t_all *all, int *step,
 	t_point *new_coordination)
 {
-	double rotation_angle;
+	double	rotation_angle;
 
 	all->player->rotation_angle += all->player->turn_direction * \
 		all->player->rotation_speed;
-
 	if (all->player->rotation_angle > 2 * M_PI)
 		all->player->rotation_angle -= 2 * M_PI;
 	if (all->player->rotation_angle < 0)
 		all->player->rotation_angle += 2 * M_PI;
-
-	rotation_angle = all->player->rotation_angle + (double)all->player->flag * M_PI / 2;
+	rotation_angle = all->player->rotation_angle + \
+		(double)all->player->flag * M_PI / 2;
 	if (rotation_angle > 2 * M_PI)
 		rotation_angle -= 2 * M_PI;
 	if (rotation_angle < 0)
 		rotation_angle += 2 * M_PI;
-
 	*step = all->player->walk_direction * all->player->move_speed;
 	new_coordination->x = all->player->coor.x + \
 		cos(rotation_angle) * (*step);
@@ -80,11 +72,8 @@ void	update_coordination(t_all *all)
 	column = (int)(new_coordination.x / 64);
 	if (line >= all->number_lines || column >= (int)ft_strlen(all->map[line]))
 		return ;
-	
 	if (hitted_with_wall(new_coordination.x, new_coordination.y - 5, all))
-	{
 		return ;
-	}
 	if (hitted_with_wall(new_coordination.x + 5, new_coordination.y, all))
 		return ;
 	if (hitted_with_wall(new_coordination.x, new_coordination.y + 5, all))

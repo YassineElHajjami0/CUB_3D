@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amentag <amentag@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 12:37:35 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/06/16 11:31:12 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/06/20 20:04:08 by amentag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,9 @@
 # include "./get_next_line/get_next_line.h"
 # define WINDOW_WIDTH 1980
 # define WINDOW_HEIGHT 1024
-# define SCALE 0.5
-# define THICK 1
-# define NUMBER_RAYS (WINDOW_WIDTH / THICK)
+# define NUMBER_RAYS WINDOW_WIDTH
 # define TILE_SIZE 64
-# define A 0
-# define S 1
-# define W 13
-# define D 2
-# define LEFT 123
-# define RIGHT 124
 # define FOV (M_PI / 3)
-
 typedef struct s_data
 {
 	void	*img;
@@ -69,8 +60,7 @@ typedef struct s_player
 	double	rotation_speed;
 	int		facing_up;
 	int		facing_right;
-
-	int flag;
+	int		flag;
 }	t_player;
 
 typedef struct s_ray
@@ -84,8 +74,15 @@ typedef struct s_ray
 	int		facing_right;
 	t_point	coor;
 	double	column_height;
-	
 }	t_ray;
+
+typedef struct s_directions
+{
+	int		top;
+	int		down;
+	int		right;
+	int		left;
+}	t_directions;
 
 typedef struct s_all
 {
@@ -112,7 +109,7 @@ typedef struct s_all
 	unsigned int	*east_array;
 }	t_all;
 
-typedef struct	 s_info
+typedef struct s_info
 {
 	char	*north;
 	char	*west;
@@ -123,43 +120,54 @@ typedef struct	 s_info
 	int		map_start_at_line;
 	int		width;
 	int		height;
-	//where the player look at;
 }	t_info;
 
-char	**ft_split(char const *s, char c);
-char	*get_next_line(int fd);
-void	write_error(int n);
-// void	parsing(int ac, char **av, t_all *all);
-void	parsing(int fd, t_all *all);
-void	draw_mini_map(t_all *all);
-void	my_mlx_pixel_put(t_all *all, int x, int y, int color);
-void	init_all(t_all *all, t_info *info);
-void	init_player(t_all *all);
-void	set_ray(t_all *all, int i);
-void	set_ray_facing_direction(t_ray *ray);
-void	set_rays(t_all *all);
-bool	hitted_with_wall(double x, double y, t_all *all);
-double	get_distance(t_point a, t_point b);
-void	update_coordination(t_all *all);
+char			**ft_split(char const *s, char c);
+char			*get_next_line(int fd);
+void			write_error(int n);
+void			parsing(int fd, t_all *all);
+void			draw_mini_map(t_all *all);
+void			my_mlx_pixel_put(t_all *all, int x, int y, int color);
+void			init_all(t_all *all, t_info *info);
+void			init_player(t_all *all);
+void			set_ray(t_all *all, int i);
+void			set_ray_facing_direction(t_ray *ray);
+void			set_rays(t_all *all);
+bool			hitted_with_wall(double x, double y, t_all *all);
+double			get_distance(t_point a, t_point b);
+void			update_coordination(t_all *all);
+int				is_white_space(char c);
+bool			invalid_line(char *line);
+int				valide_option(char *str);
+bool			files_exist(t_info *info);
+bool			init_info(t_info *info, int type, char *line);
+bool			parse_option(int fd, t_info *info);
+bool			valid_line(char *line);
+int				valide_option(char *str);
+bool			file_end_with_xpm(t_info *info);
+bool			files_exist(t_info *info);
+bool			check_range(t_info *info, int type);
+bool			valid_char(char c);
+bool			valid_surrounded(char c1, char c2);
+int				surrounded_with_walls(char **map, int i, int j);
+void			analyse_map(t_all *all);
+int				ft_strncmp(const char *s1, const char *s2, size_t n);
+char			*ft_strtrim(char const *s1, char const *set);
+char			*ft_substr(char const *s, unsigned int start, size_t len);
+int				ft_isdigit(int c);
+int				ft_atoi(const char *str);
+char			*ft_strdup(const char *s1);
+char			*ft_strchr(const char *str, int c);
+size_t			ft_strlen(const char *s);
+char			*ft_strdup(const char *s1);
+unsigned int	*get_direction(t_all *all, int column);
+void			draw_column(t_all *all, int column, int start, int end);
+void			rendering_walls(t_all *all);
+void			draw_floor(t_all *all);
+void			draw_ceil(t_all *all);
+int				key_hook(int key, t_all *all);
+int				key_released(int keycode, t_all *all);
+t_point			get_vertical_touch(t_all *all, int i);
+t_point			get_horizontal_touch(t_all *all, int i);
 
-
-//parsing 
-int		is_white_space(char c);
-bool	invalid_line(char *line);
-int		valide_option(char *str);
-bool	files_exist(t_info *info);
-bool	init_info(t_info *info, int type, char *line);
-bool	parse_option(int fd, t_info *info);
-bool valid_line(char *line);
-
-//libft 
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-char	*ft_strtrim(char const *s1, char const *set);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-int		ft_isdigit(int c);
-int    ft_atoi(const char *str);
-char	*ft_strdup(const char *s1);
-char	*ft_strchr(const char *str, int c);
-size_t	ft_strlen(const char *s);
-char	*ft_strdup(const char *s1);
 #endif
