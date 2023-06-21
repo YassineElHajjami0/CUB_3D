@@ -6,7 +6,7 @@
 /*   By: amentag <amentag@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 12:37:35 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/06/20 20:04:08 by amentag          ###   ########.fr       */
+/*   Updated: 2023/06/21 21:01:24 by amentag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 # include <fcntl.h>
 # include <mlx.h>
 # include <math.h>
-# include "./get_next_line/get_next_line.h"
+# include "./get_next_line/get_next_line.h" 
 # define WINDOW_WIDTH 1980
 # define WINDOW_HEIGHT 1024
 # define NUMBER_RAYS WINDOW_WIDTH
 # define TILE_SIZE 64
-# define FOV (M_PI / 3)
+
 typedef struct s_data
 {
 	void	*img;
@@ -169,5 +169,7 @@ int				key_hook(int key, t_all *all);
 int				key_released(int keycode, t_all *all);
 t_point			get_vertical_touch(t_all *all, int i);
 t_point			get_horizontal_touch(t_all *all, int i);
-
+void			increment(t_point *point, t_point p);
+t_point			get_vertical_touch(t_all *all, int i);
+t_point			get_horizontal_touch(t_all *all, int i);
 #endif

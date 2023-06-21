@@ -1,11 +1,11 @@
 NAME = cub3d
 CFLAGS =  -lmlx -framework OpenGL -framework AppKit
 CC = cc
+HEADER = cub3d.h get_next_line/get_next_line.h
 
-SRC =   drawing/drawing.c \
+SRCS =	drawing/drawing.c \
 		drawing/rendering_walls.c \
 		get_next_line/get_next_line.c \
-		get_next_line/get_next_line.h \
 		get_next_line/get_next_line_utils.c \
 		init/init.c \
 		libft/split.c \
@@ -18,15 +18,23 @@ SRC =   drawing/drawing.c \
 		calculations_fns.c \
 		cub3d.c \
 		keys_handler.c \
-		ray_casting.c
+		ray_casting.c \
+		ray_casting2.c
 
+OBJS = ${SRCS:.c=.o}
 
-all : $(NAME)
+all : ${NAME}
 
-$(NAME): $(SRC)
-	$(CC) $(CFLAGS) $(SRC)
+${NAME} : ${OBJS}
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-clean :
-	rm -rf $(NAME)
+%.o : %.c ${HEADER}
+	$(CC) -c $< -o $@
 
-re : clean all
+clean:
+	${RM} ${OBJS}
+
+fclean: clean
+	${RM} ${NAME}
+
+re: fclean all
