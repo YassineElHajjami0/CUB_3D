@@ -1,4 +1,4 @@
-NAME = cub3d
+NAME = cub3D
 CFLAGS =  -lmlx -framework OpenGL -framework AppKit
 CC = cc
 HEADER = cub3d.h get_next_line/get_next_line.h

@@ -6,7 +6,7 @@
 /*   By: amentag <amentag@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:16:23 by amentag           #+#    #+#             */
-/*   Updated: 2023/06/20 17:53:47 by amentag          ###   ########.fr       */
+/*   Updated: 2023/06/22 16:05:44 by amentag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ bool	check_range(t_info *info, int type)
 	else
 		n = info->ceil;
 	i = 0;
-	while (n[i])
+	while (i < 3)
 	{
 		if (n[i] < 0 || n[i] > 255)
 			return (false);

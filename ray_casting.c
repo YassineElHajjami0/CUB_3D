@@ -6,7 +6,7 @@
 /*   By: amentag <amentag@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 13:30:13 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/06/21 20:32:42 by amentag          ###   ########.fr       */
+/*   Updated: 2023/06/22 16:47:40 by amentag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	set_ray(t_all *all, int i)
 		all->rays[i].distance = dist_hor;
 	}
 	all->rays[i].distance = cos((M_PI / 6) - \
-		(M_PI / 3 * NUMBER_RAYS) * i) * all->rays[i].distance;
-	all->rays[i].column_height = 100000 / all->rays[i].distance;
+		(M_PI / (3 * NUMBER_RAYS)) * i) * all->rays[i].distance;
+	all->rays[i].column_height = RATIO / all->rays[i].distance;
 }
 
 void	set_ray_facing_direction(t_ray *ray)

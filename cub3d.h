@@ -6,7 +6,7 @@
 /*   By: amentag <amentag@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 12:37:35 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/06/21 21:01:24 by amentag          ###   ########.fr       */
+/*   Updated: 2023/06/22 16:48:15 by amentag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define WINDOW_HEIGHT 1024
 # define NUMBER_RAYS WINDOW_WIDTH
 # define TILE_SIZE 64
+# define RATIO 100000
 
 typedef struct s_data
 {
@@ -84,6 +85,19 @@ typedef struct s_directions
 	int		left;
 }	t_directions;
 
+typedef struct s_info
+{
+	char	*north;
+	char	*west;
+	char	*east;
+	char	*south;
+	int		ceil[3];
+	int		floor[3];
+	int		map_start_at_line;
+	int		width;
+	int		height;
+}	t_info;
+
 typedef struct s_all
 {
 	char			**map;
@@ -107,20 +121,9 @@ typedef struct s_all
 	unsigned int	*south_array;
 	unsigned int	*west_array;
 	unsigned int	*east_array;
+	t_info			*info;
 }	t_all;
 
-typedef struct s_info
-{
-	char	*north;
-	char	*west;
-	char	*east;
-	char	*south;
-	int		ceil[3];
-	int		floor[3];
-	int		map_start_at_line;
-	int		width;
-	int		height;
-}	t_info;
 
 char			**ft_split(char const *s, char c);
 char			*get_next_line(int fd);

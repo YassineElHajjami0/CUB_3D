@@ -6,9 +6,11 @@
 /*   By: amentag <amentag@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 12:52:44 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/06/20 20:18:54 by amentag          ###   ########.fr       */
+/*   Updated: 2023/06/22 16:30:08 by amentag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdio.h>
 
 #include "cub3d.h"
 #include "get_next_line/get_next_line.h"
@@ -50,27 +52,35 @@ t_info	*get_info(void)
 	return (info);
 }
 
+int	check_extension(char *s)
+{
+	if (ft_strlen(s) >= 5 &&
+	     s[ft_strlen(s) - 1] == 'b' && s[ft_strlen(s) - 2] == 'u'
+	    && s[ft_strlen(s) - 3] == 'c' && s[ft_strlen(s) - 4] == '.'
+	    && s[ft_strlen(s) - 5] != '/')
+	    return (1);
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	t_all	*all;
-	t_info	*info;
 	int		fd;
 
-	if (ac != 2)
-		return (1);
+	if (ac != 2 || !check_extension(av[1]))
+		write_error(2);
 
-	//check .ber
-	info = get_info();
+	all = malloc(sizeof(t_all));
+	all->info = get_info();
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		write_error(2);
-	if (!parse_option(fd, info))
+	if (!parse_option(fd, all->info))
 		write_error(2);
-	all = malloc(sizeof(t_all));
 	all->choosed_map = av[1];
 	parsing(fd, all);
 	close(fd);
-	init_all(all, info);
+	init_all(all, all->info);
 	init_player(all);
 	mlx_hook(all->win, 2, 0, key_hook, all);
 	mlx_hook(all->win, 3, 0, key_released, all);
@@ -81,6 +91,6 @@ int	main(int ac, char **av)
 }
 
 /*
-	1 		----> 	64
+	1 		----> 	100 000
 	line	----> 	height
 */
