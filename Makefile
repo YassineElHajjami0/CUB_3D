@@ -1,5 +1,6 @@
 NAME = cub3D
-CFLAGS =  -lmlx -framework OpenGL -framework AppKit
+LINK =  -lmlx -framework OpenGL -framework AppKit
+CFLAGS = -Wall -Wextra -Werror
 CC = cc
 HEADER = cub3d.h get_next_line/get_next_line.h
 
@@ -26,10 +27,10 @@ OBJS = ${SRCS:.c=.o}
 all : ${NAME}
 
 ${NAME} : ${OBJS}
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) $(LINK) $(OBJS) -o $(NAME)
 
 %.o : %.c ${HEADER}
-	$(CC) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	${RM} ${OBJS}

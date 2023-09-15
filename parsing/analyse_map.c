@@ -6,7 +6,7 @@
 /*   By: amentag <amentag@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 18:06:35 by amentag           #+#    #+#             */
-/*   Updated: 2023/06/20 18:41:31 by amentag          ###   ########.fr       */
+/*   Updated: 2023/06/23 07:04:31 by amentag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ int	surrounded_with_walls(char **map, int i, int j)
 		return (1);
 	if (valid_char(map[i][j]) || is_white_space(map[i][j]))
 	{
-		if (j < ft_strlen(map[dir.top]) && \
+		if (j < (int)ft_strlen(map[dir.top]) && \
 			!valid_surrounded(map[i][j], map[dir.top][j]))
 			return (0);
-		if (j < ft_strlen(map[dir.down]) && \
+		if (j < (int)ft_strlen(map[dir.down]) && \
 			!valid_surrounded(map[i][j], map[dir.down][j]))
 			return (0);
-		if (dir.right == ft_strlen(map[i]) || dir.left == -1)
+		if (dir.right == (int)ft_strlen(map[i]) || dir.left == -1)
 		{
 			if (is_white_space(map[i][j]))
 				return (1);

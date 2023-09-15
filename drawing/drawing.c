@@ -6,7 +6,7 @@
 /*   By: amentag <amentag@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 18:44:35 by amentag           #+#    #+#             */
-/*   Updated: 2023/06/20 19:45:18 by amentag          ###   ########.fr       */
+/*   Updated: 2023/06/23 07:04:03 by amentag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,22 @@ unsigned int	get_color(t_all *all, int x, int y)
 	return (0xdfbdff);
 }
 
-void	draw_mini_map(t_all *all)
+void	init_points(t_point *a, t_point *b)
 {
-	int				i;
+	a->x = -1;
+	a->y = -1;
+	b->x = -1;
+	b->y = -1;
+}
+
+void	draw_mini_map(t_all *all, int i)
+{
 	int				j;
 	unsigned int	color;
 	t_point			a;
 	t_point			b;
 
-	i = -1;
+	init_points(&a, &b);
 	while (++i < TILE_SIZE * 3)
 	{
 		j = -1;

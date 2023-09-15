@@ -6,7 +6,7 @@
 /*   By: amentag <amentag@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 12:52:44 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/06/22 16:30:08 by amentag          ###   ########.fr       */
+/*   Updated: 2023/06/23 07:17:01 by amentag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	loop(t_all *all)
 	draw_ceil(all);
 	rendering_walls(all);
 	draw_floor(all);
-	draw_mini_map(all);
+	draw_mini_map(all, -1);
 	return (0);
 }
 
@@ -54,11 +54,10 @@ t_info	*get_info(void)
 
 int	check_extension(char *s)
 {
-	if (ft_strlen(s) >= 5 &&
-	     s[ft_strlen(s) - 1] == 'b' && s[ft_strlen(s) - 2] == 'u'
-	    && s[ft_strlen(s) - 3] == 'c' && s[ft_strlen(s) - 4] == '.'
-	    && s[ft_strlen(s) - 5] != '/')
-	    return (1);
+	if (ft_strlen(s) >= 5 && s[ft_strlen(s) - 1] == 'b' && \
+		s[ft_strlen(s) - 2] == 'u' && s[ft_strlen(s) - 3] == 'c' \
+		&& s[ft_strlen(s) - 4] == '.' && s[ft_strlen(s) - 5] != '/')
+		return (1);
 	return (0);
 }
 
@@ -69,7 +68,6 @@ int	main(int ac, char **av)
 
 	if (ac != 2 || !check_extension(av[1]))
 		write_error(2);
-
 	all = malloc(sizeof(t_all));
 	all->info = get_info();
 	fd = open(av[1], O_RDONLY);
@@ -89,8 +87,3 @@ int	main(int ac, char **av)
 	mlx_loop(all->mlx);
 	return (0);
 }
-
-/*
-	1 		----> 	100 000
-	line	----> 	height
-*/

@@ -6,7 +6,7 @@
 /*   By: amentag <amentag@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 19:12:25 by amentag           #+#    #+#             */
-/*   Updated: 2023/06/22 14:50:07 by amentag          ###   ########.fr       */
+/*   Updated: 2023/06/23 06:57:17 by amentag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ void	draw_floor(t_all *all)
 		start = WINDOW_HEIGHT / 2 + all->rays[i].column_height / 2;
 		while (start <= WINDOW_HEIGHT)
 		{
-			// my_mlx_pixel_put(all, i, start, 0x55165E);
-			my_mlx_pixel_put(all, i, start, (all->info->floor[0] << 16) + (all->info->floor[1] << 8) + all->info->floor[2]);
+			my_mlx_pixel_put(all, i, start, (all->info->floor[0] << 16) + \
+				(all->info->floor[1] << 8) + all->info->floor[2]);
 			start++;
 		}
 	}
@@ -100,8 +100,8 @@ void	draw_ceil(t_all *all)
 		start = 0;
 		while (start <= WINDOW_HEIGHT / 2 - all->rays[all->i].column_height / 2)
 		{
-			my_mlx_pixel_put(all, i, start, (all->info->ceil[0] << 16) + (all->info->ceil[1] << 8) + all->info->ceil[2]);
-			// my_mlx_pixel_put(all, i, start, 0x06265C);
+			my_mlx_pixel_put(all, i, start, (all->info->ceil[0] << 16) + \
+				(all->info->ceil[1] << 8) + all->info->ceil[2]);
 			start++;
 		}
 	}

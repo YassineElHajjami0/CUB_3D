@@ -6,7 +6,7 @@
 /*   By: amentag <amentag@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 12:37:35 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/06/22 16:48:15 by amentag          ###   ########.fr       */
+/*   Updated: 2023/06/23 07:02:45 by amentag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,12 +124,11 @@ typedef struct s_all
 	t_info			*info;
 }	t_all;
 
-
 char			**ft_split(char const *s, char c);
 char			*get_next_line(int fd);
 void			write_error(int n);
 void			parsing(int fd, t_all *all);
-void			draw_mini_map(t_all *all);
+void			draw_mini_map(t_all *all, int i);
 void			my_mlx_pixel_put(t_all *all, int x, int y, int color);
 void			init_all(t_all *all, t_info *info);
 void			init_player(t_all *all);

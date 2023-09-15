@@ -6,7 +6,7 @@
 /*   By: amentag <amentag@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:53:55 by amentag           #+#    #+#             */
-/*   Updated: 2023/06/22 16:04:16 by amentag          ###   ########.fr       */
+/*   Updated: 2023/06/23 07:04:40 by amentag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ bool	init_rgb(t_info *info, int type, char *line)
 {
 	char	*rgb;
 	int		i;
-	int		flag;
 	int		number;
 	int		*n;
 
